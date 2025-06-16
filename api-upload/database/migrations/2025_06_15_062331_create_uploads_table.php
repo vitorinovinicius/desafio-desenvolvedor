@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
 			$table->string('file_name');
-    		$table->date('rpt_dt')->nullable();
+			$table->string('file_path')->nullable();
+			$table->date('date')->nullable();
+			$table->string('status')->comment('Tipos de status: Processing | Finished')->nullable();
 
             $table->timestamps();
 			$table->softDeletes();
