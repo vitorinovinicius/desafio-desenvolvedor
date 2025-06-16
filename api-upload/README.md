@@ -67,24 +67,23 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 5. Configurar `.env`
+### 5. Configurar `.env`:
+Exemplo de configuração para MySQL e MongoDB no Docker:
 
 ```env
 APP_NAME=Laravel
 APP_URL=http://localhost
 
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
+DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=seu_banco_mysql
-DB_USERNAME=root
-DB_PASSWORD=senha
+DB_DATABASE=laravel
+DB_USERNAME=laravel
+DB_PASSWORD=secret
 
-MONGO_DB_HOST=127.0.0.1
+MONGO_DB_HOST=mongodb
 MONGO_DB_PORT=27017
-MONGO_DB_DATABASE=seu_banco_mongodb
-MONGO_DB_USERNAME=
-MONGO_DB_PASSWORD=
+MONGO_DB_DATABASE=laravel_mongo
 
 PASSPORT_PERSONAL_ACCESS_CLIENT_ID=
 PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=
@@ -321,6 +320,39 @@ php artisan test
 ```
 
 ---
+---
+
+## 🚀 Rodando com Docker
+
+1. **Build dos containers:**
+   ```sh
+   docker-compose build --no-cache
+   ```
+2. **Suba o ambiente:**
+   ```sh
+   docker-compose up
+   ```
+3. **Acesse a aplicação:**
+   - API: http://localhost:8080
+
+4. **Comandos úteis:**
+   - Rodar migrations:
+     ```sh
+     docker-compose exec app php artisan migrate
+     ```
+   - Gerar chaves do Passport (não roda migrations):
+     ```sh
+     docker-compose exec app php artisan passport:client --password
+     ```
+   - Rodar fila:
+     ```sh
+     docker-compose exec app php artisan queue:work
+     ```
+
+5. **Variáveis de ambiente:**
+   - O arquivo `.env` já está preparado para uso com Docker (MySQL, MongoDB, etc).
+
+___
 
 ## 📘 Referências
 
