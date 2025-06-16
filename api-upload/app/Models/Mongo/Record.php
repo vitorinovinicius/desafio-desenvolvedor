@@ -14,7 +14,6 @@ class Record extends Model implements Transformable
     protected $collection = 'records';
 
     protected $fillable = [
-        'upload_id',
         'RptDt',
         'TckrSymb',
         'MktNm',
