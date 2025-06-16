@@ -20,9 +20,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Route::group(['prefix' => 'api', 'middleware' => ['cors'] ], function() {
-            Passport::ignoreRoutes();
-        });
+        Passport::ignoreRoutes();
 
         Passport::tokensExpireIn(Carbon::now()->addDays(3));
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(3));

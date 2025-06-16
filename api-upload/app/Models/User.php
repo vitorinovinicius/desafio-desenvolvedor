@@ -9,6 +9,8 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable implements Transformable
 {
@@ -18,7 +20,8 @@ class User extends Authenticatable implements Transformable
     HasFactory,
     Notifiable,
     HasApiTokens,
-    TransformableTrait;
+    TransformableTrait,
+    LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +56,10 @@ class User extends Authenticatable implements Transformable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        return \Spatie\Activitylog\LogOptions::defaults();
     }
 }
