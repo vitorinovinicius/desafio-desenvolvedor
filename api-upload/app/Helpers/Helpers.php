@@ -26,3 +26,31 @@ if (!function_exists('geraActivityLog')) {
         ]);
     }
 }
+
+if (!function_exists('cleanAndStoreFile')) {
+    function cleanAndStoreFile(UploadedFile $file, string $path, string $disk = 'local'): void
+    {
+        $lines = file($file->getRealPath());
+        array_shift($lines);
+        $cleanContent = implode('', $lines);
+
+        Storage::disk($disk)->put($path, $cleanContent);
+    }
+}
+
+if (!function_exists('filter')) {
+    function filter(Request $request, array $allowedFilters): array
+    {
+        $filters = [];
+
+        foreach ($allowedFilters as $filterKey) {
+            $value = $request->get($filterKey);
+
+            if (!is_null($value)) {
+                $filters[$filterKey] = $value;
+            }
+        }
+
+        return $filters;
+    }
+}
